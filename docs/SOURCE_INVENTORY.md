@@ -18,7 +18,7 @@ Legend: **INCLUDED** = copied into this artifact. Relative DESTINATION paths are
 | `src/meg_rw/reweight.py` | `src/meg_rw/reweight.py` | Legacy phi helpers | yes | yes | Core |
 | `src/meg_rw/semantic.py` | `src/meg_rw/semantic.py` | Semantic path (disabled in ECIR) | yes | yes | Completeness; default off |
 | `src/meg_rw/__init__.py` | `src/meg_rw/__init__.py` | Package | yes | yes | |
-| `src/cikm_train/recbole_dataset.py` | `src/cikm_train/recbole_dataset.py` | c_ui + inject φ | yes | yes | Core |
+| `src/training/recbole_dataset.py` | `src/training/recbole_dataset.py` | c_ui + inject φ | yes | yes | Core |
 | `research_ecir2027/experiments/prepare_amazon_gowalla_ecir.py` | `scripts/prepare_external_datasets.py` | External dataset prep | yes | yes | Docs + optional full repro |
 | `research_ecir2027/paper/final_exports/metadata/dataset_preprocessing.md` | — | Stale (LOO, wrong c_ui) | no | **no** | Conflicts with audit |
 | `research_ecir2027/paper/final_exports/metadata/intervention_implementation.md` | — | Stale KL / sampling | no | **no** | Conflicts with audit |
@@ -39,10 +39,10 @@ Legend: **INCLUDED** = copied into this artifact. Relative DESTINATION paths are
 
 | SOURCE PATH | DESTINATION PATH | PURPOSE | AUTHORITATIVE? | INCLUDED? | REASON |
 |---|---|---|---|---|---|
-| `src/cikm_train/run_experiment.py` | `src/cikm_train/run_experiment.py` | Training entry | yes | yes | |
-| `src/cikm_train/experiment_artifacts.py` | `src/cikm_train/experiment_artifacts.py` | Artifacts | yes | yes | |
-| `src/cikm_train/__init__.py` | `src/cikm_train/__init__.py` | Package | yes | yes | |
-| `src/cikm_eval/*.py` | `src/cikm_eval/*.py` | Full-sort audit, L_exp, Steck | yes | yes | All modules |
+| `src/training/run_experiment.py` | `src/training/run_experiment.py` | Training entry | yes | yes | |
+| `src/training/experiment_artifacts.py` | `src/training/experiment_artifacts.py` | Artifacts | yes | yes | |
+| `src/training/__init__.py` | `src/training/__init__.py` | Package | yes | yes | |
+| `src/evaluation/*.py` | `src/evaluation/*.py` | Full-sort audit, L_exp, Steck | yes | yes | All modules |
 | `research_ecir2027/experiments/analyze_fairness_transfer.py` | `src/analysis/analyze_fairness_transfer.py` | F_in/F_out aggregation | yes | yes | Analysis |
 
 ## Q–T. Stats, Steck, external
@@ -86,11 +86,11 @@ Legend: **INCLUDED** = copied into this artifact. Relative DESTINATION paths are
 
 | SOURCE PATH | DESTINATION PATH | PURPOSE | AUTHORITATIVE? | INCLUDED? | REASON |
 |---|---|---|---|---|---|
-| `config/cikm_base.yaml` | `configs/primary/base.yaml` | Shared eval/train | yes | yes | Sanitize comments |
-| `config/cikm_ml1m_*.yaml` | `configs/primary/ml1m_*.yaml` | Primary models | yes | yes | |
-| `config/cikm_lastfm_*.yaml` | `configs/primary/lastfm_*.yaml` | Primary models | yes | yes | |
-| `config/cikm_gowalla_ecir_ngcf.yaml` | `configs/external/gowalla_ngcf.yaml` | External | yes | yes | |
-| `config/cikm_amazonbooks_ecir_lightgcn.yaml` | `configs/external/amazon_books_lightgcn.yaml` | External | yes | yes | |
+| `configs/primary/base.yaml` | `configs/primary/base.yaml` | Shared eval/train | yes | yes | Sanitize comments |
+| source primary ML-1M YAMLs | `configs/primary/ml1m_*.yaml` | Primary models | yes | yes | |
+| source primary LastFM YAMLs | `configs/primary/lastfm_*.yaml` | Primary models | yes | yes | |
+| source Gowalla NGCF YAML | `configs/external/gowalla_ngcf.yaml` | External | yes | yes | |
+| source Amazon LightGCN YAML | `configs/external/amazon_books_lightgcn.yaml` | External | yes | yes | |
 | `clean_matrix/**/config_resolved.yaml` | — | Resolved with absolute paths | yes | **no** | Identity leak; recreate clean configs |
 
 ## Tests & methodology docs
@@ -104,7 +104,7 @@ Legend: **INCLUDED** = copied into this artifact. Relative DESTINATION paths are
 | `tests/test_transfer_delta.py` | `tests/test_transfer_delta.py` | Gains | yes | yes | |
 | Other tests | `tests/` | Supporting | yes | yes | If self-contained |
 | `research_ecir2027/audit/FINAL_METHODS_REPRODUCIBILITY_AUDIT.md` | `docs/METHODS_AUDIT_SUMMARY.md` | Methods truth | yes | yes | Anonymized excerpt/facts only |
-| `research_ecir2027/reports/METHOD_FREEZE_AND_CLEAN_PIPELINE.md` | — | Internal freeze | yes | **partial** | Facts folded into METHODS.md; skip CIKM path names identifying prior venue work where possible |
+| `research_ecir2027/reports/METHOD_FREEZE_AND_CLEAN_PIPELINE.md` | — | Internal freeze | yes | **partial** | Facts folded into METHODS.md; facts only |
 
 ## Deliberately excluded
 
@@ -117,7 +117,7 @@ Legend: **INCLUDED** = copied into this artifact. Relative DESTINATION paths are
 | `PAPER_RESULTS_AUTHORITATIVE.md` unchecked c_ui claim | Stale ML-1M c_ui; numbers folded via CSVs |
 | Source `.git`, IDE files, wandb | Anonymity / secrets |
 | Raw `dataset/` dumps | License / redistribution; document how to obtain |
-| Source README (CIKM / author-facing) | Identifying / stale |
+| Source README (author-facing) | Identifying / stale |
 
 ## Conflicts vs FINAL_METHODS_REPRODUCIBILITY_AUDIT.md
 

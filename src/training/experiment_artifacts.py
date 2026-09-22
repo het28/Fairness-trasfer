@@ -67,7 +67,7 @@ def setup_file_logging(log_path: Path, level: int = logging.INFO) -> logging.Fil
     fh.setFormatter(fmt)
     root = logging.getLogger()
     root.addHandler(fh)
-    for name in ("recbole", "cikm_train"):
+    for name in ("recbole", "training"):
         logging.getLogger(name).setLevel(level)
     return fh
 

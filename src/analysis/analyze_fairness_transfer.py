@@ -41,8 +41,8 @@ FRACS = (0.1, 0.2, 0.3, 0.4)
 BUDGETS = (0.01, 0.025, 0.05, 0.10)
 
 DATASET_YAML = {
-    "ml1m": "config/cikm_ml1m_lightgcn.yaml",
-    "lastfm": "config/cikm_lastfm_lightgcn.yaml",
+    "ml1m": "configs/primary/ml1m_lightgcn.yaml",
+    "lastfm": "configs/primary/lastfm_lightgcn.yaml",
 }
 DATASET_NAME = {"ml1m": "ml-1m", "lastfm": "lastfm"}
 
@@ -234,7 +234,7 @@ def load_train_stats(dataset: str, seed: int, multiply: bool, transform: str) ->
         model="LightGCN",
         dataset=DATASET_NAME[dataset],
         config_file_list=[
-            str(ROOT / "config/cikm_base.yaml"),
+            str(ROOT / "configs/primary/base.yaml"),
             str(ROOT / DATASET_YAML[dataset]),
         ],
         config_dict={"seed": int(seed), "use_gpu": False},
@@ -1223,8 +1223,8 @@ def main():
                 "",
                 "| Paper | Intervened on | Stage | Pre-learning fairness measured? | Post-learning exposure? | Multi-architecture? | Transfer as object? |",
                 "|---|---|---|---|---|---|---|",
-                "| Mansoury et al. CIKM’20 | feedback dynamics | simulation loop | bias amp. | yes (amp.) | limited | amplification, not preprocess transfer |",
-                "| Choi et al. CIKM’22 | neighbor aggregation | train GNN | no explicit F_in | yes | GNN-focused | no |",
+                "| Mansoury et al. 2020 | feedback dynamics | simulation loop | bias amp. | yes (amp.) | limited | amplification, not preprocess transfer |",
+                "| Choi et al. 2022 | neighbor aggregation | train GNN | no explicit F_in | yes | GNN-focused | no |",
                 "| APDA SIGIR’23 | aggregation weights | train GNN | no | yes | LightGCN-family | no |",
                 "| FDA WWW’23 | data augmentation | preprocess | DP/EO-style | yes | multi-model claimed | not F_in→F_out graph mass |",
                 "| Fair PageRank edge reweight 2025 | graph edges | structural | PR mass | not CF exposure | n/a | no |",

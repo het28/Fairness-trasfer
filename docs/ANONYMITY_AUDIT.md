@@ -19,7 +19,6 @@ Performed after constructing the anonymous artifact. Matches are inspected; this
 | IDE / OS junk | PASS | Tree | Excluded via `.gitignore` |
 | Source `.git` history | PASS | Destination only | Fresh `git init`; no source history |
 | CITATION.cff authors | PASS | — | Omitted for double-blind review |
-| Module names `cikm_*` | NOTED | `src/cikm_train`, `src/cikm_eval` | Historical package names retained for import stability; not personal identifiers |
 | Stale wrong methods docs | PASS | — | Excluded from copy |
 
 ## Residual notes for authors (manual)

@@ -9,7 +9,7 @@ from typing import Literal
 import numpy as np
 from scipy.stats import pearsonr, spearmanr
 
-from cikm_eval.types import (
+from evaluation.types import (
     AlignmentResult,
     EvalInputs,
     GroupName,
@@ -18,7 +18,7 @@ from cikm_eval.types import (
     ordered_item_groups,
     ordered_user_groups,
 )
-from cikm_eval.user_fairness import compute_user_group_fairness
+from evaluation.user_fairness import compute_user_group_fairness
 
 NormalizeMode = Literal["row", "global", "count"]
 

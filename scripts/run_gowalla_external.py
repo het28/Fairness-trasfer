@@ -25,7 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 os.chdir(ROOT)
 
-from cikm_train.run_experiment import run_experiment
+from training.run_experiment import run_experiment
 
 OUT = ROOT / "runs" / "external" / "gowalla"
 
@@ -114,10 +114,10 @@ def main():
             cfg = {
                 "seed": seed,
                 "dataset": DATASET_RECBOLE,
-                "cikm_backbone": MODEL,
-                "cikm_dataset_short": DATASET_SHORT,
-                "cikm_model_short": MODEL,
-                "cikm_run_label": label,
+                "backbone": MODEL,
+                "dataset_short": DATASET_SHORT,
+                "model_short": MODEL,
+                "run_label": label,
                 "meg_rw_multiply_c_ui": True,
                 "meg_rw_c_ui_transform": "identity",
                 "meg_rw_save_calibration_info": True,

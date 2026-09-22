@@ -2,8 +2,8 @@
 
 import numpy as np
 
-from cikm_eval.transfer import compute_transfer_delta
-from cikm_eval.types import TransferMatrixResult
+from evaluation.transfer import compute_transfer_delta
+from evaluation.types import TransferMatrixResult
 
 
 def test_compute_transfer_delta_known():

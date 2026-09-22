@@ -79,7 +79,7 @@ def recall_at_k(recs: list[int], test: set[int], k: int) -> float:
 
 
 def metrics_from_recs(recs_by_u, test_by_u, item_group_idx, item_group_name, user_group, T, k=10):
-    from cikm_eval.rerank import _steck_catalog  # noqa: F401 — ensure import path
+    from evaluation.rerank import _steck_catalog  # noqa: F401 — ensure import path
 
     n = 0
     ndcgs, recalls, losses = [], [], []
@@ -130,13 +130,13 @@ def score_candidates_for_run(run_dir: Path, cand_k: int = 100):
     from recbole.data import create_dataset, data_preparation
     from recbole.utils import get_model, init_seed
 
-    from cikm_eval.grouping import (
+    from evaluation.grouping import (
         item_group_labels_from_train_coo,
         user_mainstreamness_labels,
         normalized_popularity,
     )
-    from cikm_eval.types import item_group_name_from_index, user_group_name_from_index
-    from cikm_train.run_experiment import _build_model, _ensure_torch_load_compat, _ensure_scipy_compat
+    from evaluation.types import item_group_name_from_index, user_group_name_from_index
+    from training.run_experiment import _build_model, _ensure_torch_load_compat, _ensure_scipy_compat
 
     _ensure_scipy_compat()
     _ensure_torch_load_compat()
@@ -157,7 +157,7 @@ def score_candidates_for_run(run_dir: Path, cand_k: int = 100):
         "use_gpu": False,
         "gpu_id": "0",
         "meg_rw_alpha": 0.0,
-        "cikm_backbone": "weighted_lightgcn" if "LightGCN" in model_name else "weighted_ngcf",
+        "backbone": "weighted_lightgcn" if "LightGCN" in model_name else "weighted_ngcf",
         "show_progress": False,
         "epochs": 0,
     }
@@ -196,8 +196,8 @@ def score_candidates_for_run(run_dir: Path, cand_k: int = 100):
     short = "ml1m" if dataset in ("ml-1m", "ml1m") else "lastfm"
     backbone = "lightgcn" if "LightGCN" in model_name else "ngcf"
     file_list = [
-        str(ROOT / "config" / "cikm_base.yaml"),
-        str(ROOT / "config" / f"cikm_{short}_{backbone}.yaml"),
+        str(ROOT / "configs" / "primary" / "base.yaml"),
+        str(ROOT / "configs" / "primary" / f"{short}_{backbone}.yaml"),
     ]
     config = Config(
         model=model_name,
@@ -217,8 +217,8 @@ def score_candidates_for_run(run_dir: Path, cand_k: int = 100):
     model.load_state_dict(sd)
     model.eval()
 
-    from cikm_eval.fairness_audit import build_eval_inputs_from_full_sort
-    from cikm_eval.rerank import rerank_topk
+    from evaluation.fairness_audit import build_eval_inputs_from_full_sort
+    from evaluation.rerank import rerank_topk
 
     # We need raw candidates+scores — replicate scoring loop from fairness_audit
     from recbole.data.dataloader import FullSortEvalDataLoader
@@ -251,7 +251,7 @@ def score_candidates_for_run(run_dir: Path, cand_k: int = 100):
     k_eff = min(TOPK, tot_item_num - 1)
     cand_k = int(min(tot_item_num - 1, max(k_eff, k_eff * CAND_MULT)))
 
-    from cikm_eval.fairness_audit import _full_sort_scores_with_predict_fallback
+    from evaluation.fairness_audit import _full_sort_scores_with_predict_fallback
 
     assert isinstance(test_data, FullSortEvalDataLoader)
     if hasattr(model, "restore_user_e"):
@@ -302,7 +302,7 @@ def score_candidates_for_run(run_dir: Path, cand_k: int = 100):
 
 
 def apply_steck(pack, lam: float):
-    from cikm_eval.rerank import rerank_topk
+    from evaluation.rerank import rerank_topk
 
     recs = {}
     for u, (cand, scores) in pack["cand_scores"].items():

@@ -1,6 +1,6 @@
 """
 Train/evaluate RecBole + MEG-RW. RecBole ``model`` in config selects Dataset compatibility;
-``cikm_backbone`` selects the actual recommender class.
+``backbone`` selects the actual recommender class.
 """
 
 from __future__ import annotations
@@ -20,7 +20,7 @@ from recbole.config import Config
 from recbole.data import create_dataset, data_preparation
 from recbole.utils import get_model, get_trainer, init_logger, init_seed, set_color
 
-from cikm_train.experiment_artifacts import (
+from training.experiment_artifacts import (
     append_manifest_row,
     save_metrics_json,
     save_resolved_config,
@@ -28,7 +28,7 @@ from cikm_train.experiment_artifacts import (
     split_type_from_config,
     utc_now_iso,
 )
-from cikm_train.recbole_dataset import inject_meg_rw_into_train_dataset
+from training.recbole_dataset import inject_meg_rw_into_train_dataset
 from meg_rw.reweight import DEFAULT_MEG_RW_FIELD
 from recbole_ext import (
     WeightedBPR,
@@ -78,7 +78,7 @@ def _ensure_torch_load_compat() -> None:
         original_load = torch.load
 
         # Avoid double-wrapping if run_experiment is called multiple times.
-        if getattr(original_load, "_cikm_compat_patched", False):
+        if getattr(original_load, "_torch_compat_patched", False):
             return
 
         def _load_with_legacy_default(*args, **kwargs):
@@ -86,7 +86,7 @@ def _ensure_torch_load_compat() -> None:
             kwargs.setdefault("weights_only", False)
             return original_load(*args, **kwargs)
 
-        _load_with_legacy_default._cikm_compat_patched = True  # type: ignore[attr-defined]
+        _load_with_legacy_default._torch_compat_patched = True  # type: ignore[attr-defined]
         torch.load = _load_with_legacy_default  # type: ignore[assignment]
     except Exception:
         pass
@@ -109,7 +109,7 @@ def _canonical_recbole_model(backbone: str) -> str:
     }
     if bb in alias:
         return alias[bb]
-    # Fallback: allow direct RecBole model names via cikm_backbone.
+    # Fallback: allow direct RecBole model names via backbone.
     return backbone
 
 
@@ -142,8 +142,8 @@ def _backbone_from_files(config_file_list: Sequence[str]) -> str | None:
             obj = yaml.safe_load(p.read_text())
         except Exception:
             continue
-        if isinstance(obj, dict) and obj.get("cikm_backbone"):
-            backbone = str(obj["cikm_backbone"])
+        if isinstance(obj, dict) and obj.get("backbone"):
+            backbone = str(obj["backbone"])
     return backbone
 
 
@@ -165,7 +165,7 @@ def _inject_kwargs(fd: dict[str, Any], rw_fracs: tuple[float, ...]) -> dict[str,
         cal_mode=fd.get("meg_cal_mode"),
         cal_lambda_r=float(fd.get("meg_cal_lambda_r", 1.0)),
         cal_target=str(fd.get("meg_cal_target", "catalog")),
-        # Default False preserves CIKM legacy (phi only). ECIR runners opt in.
+        # Default False preserves phi-only behaviour; primary runners opt in.
         multiply_c_ui=bool(fd.get("meg_rw_multiply_c_ui", False)),
         c_ui_transform=str(fd.get("meg_rw_c_ui_transform", "identity")),
         return_calibration_info=bool(fd.get("meg_rw_save_calibration_info", False)),
@@ -175,7 +175,7 @@ def _inject_kwargs(fd: dict[str, Any], rw_fracs: tuple[float, ...]) -> dict[str,
 def _build_model(config: Config, train_dataset):
     """Return ``(model, calibration_info_or_None)``."""
     fd = _fd(config)
-    bb = fd["cikm_backbone"].lower()
+    bb = fd["backbone"].lower()
     rw_fracs = _parse_fracs(fd.get("meg_rw_group_fracs"), default=(0.1, 0.2, 0.3, 0.4))
     if bb == "lightgcn":
         return get_model("LightGCN")(config, train_dataset), None
@@ -200,18 +200,18 @@ def _build_model(config: Config, train_dataset):
 
 
 def _experiment_id(fd: dict[str, Any]) -> str:
-    ds = str(fd.get("cikm_dataset_short") or fd["dataset"]).replace("-", "")
-    model = str(fd.get("cikm_model_short") or fd.get("cikm_backbone", "model"))
+    ds = str(fd.get("dataset_short") or fd["dataset"]).replace("-", "")
+    model = str(fd.get("model_short") or fd.get("backbone", "model"))
     seed = int(fd["seed"])
-    run_label = str(fd.get("cikm_run_label", "run"))
+    run_label = str(fd.get("run_label", "run"))
     return f"{ds}__{model}__seed{seed}__{run_label}"
 
 
 def _alpha_cell(fd: dict[str, Any]) -> str | float:
-    run_label = str(fd.get("cikm_run_label", "")).lower()
+    run_label = str(fd.get("run_label", "")).lower()
     if run_label == "baseline" or run_label.startswith("baseline__"):
         return "baseline"
-    bb = str(fd.get("cikm_backbone", "")).lower()
+    bb = str(fd.get("backbone", "")).lower()
     if "weighted" in bb:
         return float(fd.get("meg_rw_alpha", 0.0))
     return "baseline"
@@ -242,7 +242,7 @@ def run_experiment(
     config_dict = dict(config_dict or {})
 
     backbone = (
-        config_dict.get("cikm_backbone")
+        config_dict.get("backbone")
         or _backbone_from_files(config_file_list)
         or "weighted_lightgcn"
     )
@@ -271,7 +271,7 @@ def run_experiment(
     logger = getLogger()
 
     rp = Path(fd["fairness_report_dir"]) if fd.get("fairness_report_dir") else None
-    manifest_path = Path(fd["cikm_manifest_path"]) if fd.get("cikm_manifest_path") else None
+    manifest_path = Path(fd["manifest_path"]) if fd.get("manifest_path") else None
     started_at = utc_now_iso()
     log_fh = None
     if rp is not None:
@@ -315,13 +315,13 @@ def run_experiment(
         out: dict[str, Any] = {"test_result": test_result}
 
         if fairness_audit:
-            from cikm_eval.fairness_audit import (
+            from evaluation.fairness_audit import (
                 load_fairness_report_json,
                 run_fairness_audit,
                 try_load_audit_result,
             )
-            from cikm_eval.io import load_eval_inputs, save_audit_json, save_flat_audit_csv_row
-            from cikm_eval.summarize import audit_result_from_jsonable, flatten_audit_result
+            from evaluation.io import load_eval_inputs, save_audit_json, save_flat_audit_csv_row
+            from evaluation.summarize import audit_result_from_jsonable, flatten_audit_result
 
             baseline_inputs = None
             bej = fd.get("fairness_baseline_eval_json")
@@ -340,25 +340,25 @@ def run_experiment(
             topk_int = int(topk_cfg[0]) if isinstance(topk_cfg, (list, tuple)) else int(topk_cfg)
             audit_metadata = {
                 "experiment_id": exp_id,
-                "dataset": str(fd.get("cikm_dataset_short") or fd["dataset"]),
-                "model": str(fd.get("cikm_model_short") or fd.get("cikm_backbone", "")),
-                "trainer_backbone": str(fd.get("cikm_backbone", "")),
+                "dataset": str(fd.get("dataset_short") or fd["dataset"]),
+                "model": str(fd.get("model_short") or fd.get("backbone", "")),
+                "trainer_backbone": str(fd.get("backbone", "")),
                 "recbole_model": str(fd["model"]),
                 "seed": int(fd["seed"]),
                 "alpha": _alpha_cell(fd),
                 "meg_rw_alpha": float(fd.get("meg_rw_alpha", 0.0)),
                 "meg_sem_beta": float(fd.get("meg_sem_beta", 0.0)),
                 "meg_sem_enable": bool(fd.get("meg_sem_enable", False)),
-                "sota_method": str(fd.get("cikm_sota_method", "none")),
-                "sota_lambda": float(fd.get("cikm_sota_lambda", 0.2)),
-                "sota_candidate_mult": int(fd.get("cikm_sota_candidate_mult", 20)),
+                "sota_method": str(fd.get("sota_method", "none")),
+                "sota_lambda": float(fd.get("sota_lambda", 0.2)),
+                "sota_candidate_mult": int(fd.get("sota_candidate_mult", 20)),
                 "split_type": split_type_from_config(fd),
                 "transfer_normalize": "row",
                 "topk": topk_int,
                 "baseline_mode": bmode,
                 "fairness_baseline_eval_json": str(bej) if bej else "",
                 "fairness_baseline_json": str(bj) if bj else "",
-                "baseline_run_dir": str(fd.get("cikm_baseline_run_dir", "")),
+                "baseline_run_dir": str(fd.get("baseline_run_dir", "")),
                 "report_dir": str(rp.resolve()) if rp else "",
                 "timestamp_utc": utc_now_iso(),
             }
@@ -377,9 +377,9 @@ def run_experiment(
                     baseline_result=baseline_result,
                     baseline_audit_dict=baseline_audit_dict,
                     eval_inputs_path=eval_inputs_path,
-                    rerank_method=str(fd.get("cikm_sota_method", "none")),
-                    rerank_lambda=float(fd.get("cikm_sota_lambda", 0.2)),
-                    rerank_candidate_mult=int(fd.get("cikm_sota_candidate_mult", 20)),
+                    rerank_method=str(fd.get("sota_method", "none")),
+                    rerank_lambda=float(fd.get("sota_lambda", 0.2)),
+                    rerank_candidate_mult=int(fd.get("sota_candidate_mult", 20)),
                     item_fracs=_parse_fracs(fd.get("meg_rw_group_fracs")),
                 )
             except NotImplementedError as e:
@@ -420,12 +420,12 @@ def run_experiment(
                 manifest_path,
                 {
                     "experiment_id": exp_id,
-                    "dataset": str(fd.get("cikm_dataset_short") or fd["dataset"]),
-                    "model": str(fd.get("cikm_model_short") or fd.get("cikm_backbone", "")),
+                    "dataset": str(fd.get("dataset_short") or fd["dataset"]),
+                    "model": str(fd.get("model_short") or fd.get("backbone", "")),
                     "seed": int(fd["seed"]),
                     "alpha": _alpha_cell(fd),
                     "run_dir": str(rp.resolve()),
-                    "baseline_run_dir": str(fd.get("cikm_baseline_run_dir", "")),
+                    "baseline_run_dir": str(fd.get("baseline_run_dir", "")),
                     "status": status,
                     "started_at": started_at,
                     "finished_at": finished_at,
@@ -440,7 +440,7 @@ def run_experiment(
 
 def main(argv: list[str] | None = None) -> None:
     argv = argv if argv is not None else sys.argv[1:]
-    p = argparse.ArgumentParser(description="CIKM MEG-RW + RecBole training")
+    p = argparse.ArgumentParser(description="MEG-RW + RecBole training")
     p.add_argument(
         "--config",
         nargs="+",

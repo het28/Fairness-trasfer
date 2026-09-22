@@ -5,18 +5,18 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from cikm_eval.exposure import compute_item_fairness_metrics
-from cikm_eval.transfer import (
+from evaluation.exposure import compute_item_fairness_metrics
+from evaluation.transfer import (
     compute_exposure_utility_alignment,
     compute_transfer_delta,
     compute_transfer_matrix,
 )
-from cikm_eval.types import (
+from evaluation.types import (
     EvalInputs,
     FullFairnessAuditResult,
     UserGroupUtilityResult,
 )
-from cikm_eval.user_fairness import compute_per_user_utility, compute_user_group_fairness
+from evaluation.user_fairness import compute_per_user_utility, compute_user_group_fairness
 
 
 def compute_overall_utility(inputs: EvalInputs) -> dict[str, float]:
@@ -157,7 +157,7 @@ def _dataclass_to_dict(obj: Any) -> Any:
 
 def audit_result_from_jsonable(d: dict[str, Any]) -> FullFairnessAuditResult:
     """Load audit written by ``audit_result_to_jsonable``."""
-    from cikm_eval.types import (
+    from evaluation.types import (
         AlignmentResult,
         TransferDeltaResult,
         TransferMatrixResult,

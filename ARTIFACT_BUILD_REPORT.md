@@ -17,7 +17,7 @@ requirements.txt
 pyproject.toml
 .gitignore
 configs/{primary,external,post_learning}/
-src/{meg_rw,recbole_ext,cikm_train,cikm_eval,analysis}/
+src/{meg_rw,recbole_ext,training,evaluation,analysis}/
 scripts/
 results/{primary,post_learning,external,user_level,supplementary}/
 figures/{paper,supplementary}/
@@ -30,7 +30,7 @@ ARTIFACT_BUILD_REPORT.md
 
 ## 2. Files copied from source
 
-- `src/meg_rw/*`, `src/recbole_ext/*`, `src/cikm_train/*`, `src/cikm_eval/*`
+- `src/meg_rw/*`, `src/recbole_ext/*`, `src/training/*`, `src/evaluation/*`
 - Primary/external YAML configs (not resolved absolute-path dumps)
 - Frozen paper export CSVs/JSON (primary, post, external, user-level, supplementary)
 - Camera-ready figure PDFs/PNGs
@@ -122,7 +122,7 @@ Raw MovieLens / Last.fm / Gowalla / Amazon Books dumps are **not** redistributed
 
 ## 15. Unresolved issues
 
-- Package directories remain `cikm_train` / `cikm_eval` for import stability (historical names; not personal IDs).
+- Package directories remain `training` / `evaluation` for import stability (historical names; not personal IDs).
 - Optional analysis aggregators are not the primary reviewer path; prefer `verify_artifact.sh`.
 - Gowalla optional runner source file historically targeted seeds `{1,2}` as a continuation job; **frozen** `results/external/gowalla_ngcf.csv` remains the authoritative 3-seed evidence.
 

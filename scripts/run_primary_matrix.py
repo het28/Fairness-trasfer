@@ -28,7 +28,7 @@ sys.path.insert(0, str(ROOT / "src"))
 os.chdir(ROOT)
 os.environ["PYTHONPATH"] = str(ROOT / "src") + os.pathsep + os.environ.get("PYTHONPATH", "")
 
-from cikm_train.run_experiment import run_experiment
+from training.run_experiment import run_experiment
 
 OUT = ROOT / "runs" / "primary"
 PHASE = os.environ.get("PHASE", "baselines").lower()
@@ -76,15 +76,14 @@ def _common_cfg(dataset: str, model: str, seed: int, label: str) -> dict:
     meta = DATASET_CFG[dataset]
     cfg = {
         "seed": seed,
-        "cikm_backbone": model,
-        "cikm_dataset_short": meta["short"],
-        "cikm_model_short": model,
-        "cikm_run_label": label,
+        "backbone": model,
+        "dataset_short": meta["short"],
+        "model_short": model,
+        "run_label": label,
         "meg_rw_multiply_c_ui": meta["multiply_c_ui"],
         "meg_rw_c_ui_transform": meta["c_ui_transform"],
         "use_gpu": False,
-        # ECIR isolation: never write into CIKM experiment dirs
-        "checkpoint_dir": str(OUT / "_checkpoints"),
+                "checkpoint_dir": str(OUT / "_checkpoints"),
     }
     if EPOCHS:
         cfg["epochs"] = int(EPOCHS)
@@ -107,7 +106,7 @@ def _count_done() -> int:
 def _write_status(phase: str, current: str) -> None:
     done = _count_done()
     lines = [
-        f"=== CLEAN MATRIX LIVE {__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S')} ===",
+        f"=== PRIMARY MATRIX {__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S')} ===",
         f"phase: {phase}",
         f"completed_reports: {done}",
         f"current: {current}",

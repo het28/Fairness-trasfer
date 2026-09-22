@@ -57,6 +57,3 @@ Expected:
 | Gowalla | NGCF; seeds 0–2; α=0.8 + λ_R=0.1 |
 | Amazon | LightGCN seed 0; α∈{0.2,0.8}, λ_R∈{0.1,2.0} |
 
-## Package naming note
-
-Training/evaluation packages retain historical module names `cikm_train` / `cikm_eval` to avoid import-breaking renames. Scientific behavior is unchanged. See `docs/ARTIFACT_MANIFEST.md`.

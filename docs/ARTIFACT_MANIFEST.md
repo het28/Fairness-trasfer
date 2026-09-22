@@ -4,7 +4,7 @@
 
 | Decision | Rationale |
 |---|---|
-| Keep module names `cikm_train`, `cikm_eval` | Avoid import-breaking renames that could alter call paths; historical names only |
+| Packages: `training`, `evaluation` | Clear package names |
 | Do not ship `clean_matrix/` | Size; frozen CSVs suffice for reported numbers |
 | Sanitize `steck_84.csv` checkpoint column | Removed absolute local paths; basename under `checkpoints/` |
 | Exclude stale metadata docs | Wrong c_ui / split / KL / Steck grid |

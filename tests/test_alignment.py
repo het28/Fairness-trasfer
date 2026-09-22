@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from cikm_eval.transfer import compute_exposure_utility_alignment, correlation_tail_ndcg_deltas
-from cikm_eval.types import EvalInputs
+from evaluation.transfer import compute_exposure_utility_alignment, correlation_tail_ndcg_deltas
+from evaluation.types import EvalInputs
 
 
 def test_correlation_perfect_line():

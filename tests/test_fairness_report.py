@@ -1,6 +1,6 @@
 """Fairness report shape and CSV flatten."""
 
-from cikm_eval.report import flatten_report_for_csv
+from evaluation.report import flatten_report_for_csv
 
 
 def test_flatten_report_for_csv_scalars():

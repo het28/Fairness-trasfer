@@ -76,7 +76,7 @@ def inject_meg_rw_into_train_dataset(
 
     where ``c_ui`` defaults to 1 unless ``multiply_c_ui=True`` and a rating
     field is present (LastFM ``weight``). Default ``multiply_c_ui=False``
-    preserves legacy CIKM behaviour.
+    preserves legacy phi-only behaviour.
 
     If ``return_calibration_info`` is True, returns a dict with train-split
     ``q_in_0``, ``q_in``, ``T``, ``F_in``, ``phi``, ``M`` (no test leakage).

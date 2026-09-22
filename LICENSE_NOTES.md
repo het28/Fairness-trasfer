@@ -2,7 +2,7 @@
 
 This artifact aggregates:
 
-1. **Original experiment code** in `src/meg_rw/`, `src/cikm_train/`, `src/cikm_eval/`, `src/recbole_ext/`, and analysis/scripts added for this package.
+1. **Original experiment code** in `src/meg_rw/`, `src/training/`, `src/evaluation/`, `src/recbole_ext/`, and analysis/scripts added for this package.
 2. **Third-party open-source dependencies** used at runtime:
    - [RecBole](https://github.com/RUCAIBox/RecBole) (recommender library; see RecBole license)
    - [PyTorch](https://pytorch.org/) (see PyTorch license)

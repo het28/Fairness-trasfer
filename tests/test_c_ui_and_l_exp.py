@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import numpy as np
 
-from cikm_eval.exposure import per_user_exposure_loss, summarize_per_user_exposure_loss
-from cikm_eval.types import EvalInputs
-from cikm_train.recbole_dataset import _extract_c_ui
+from evaluation.exposure import per_user_exposure_loss, summarize_per_user_exposure_loss
+from evaluation.types import EvalInputs
+from training.recbole_dataset import _extract_c_ui
 
 
 class _Feat:

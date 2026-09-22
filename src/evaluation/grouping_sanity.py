@@ -6,7 +6,7 @@ from typing import Any
 
 import numpy as np
 
-from cikm_eval.grouping import (
+from evaluation.grouping import (
     item_group_labels_from_train_coo,
     normalized_popularity,
 )

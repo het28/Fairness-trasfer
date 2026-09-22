@@ -35,7 +35,7 @@ def save_fairness_report(
 def flatten_report_for_csv(report: Mapping[str, Any]) -> dict[str, Any]:
     """Single-row flatten for sweep aggregation (no nested lists)."""
     if isinstance(report, dict) and "user_fairness" in report and "utility_overall" in report:
-        from cikm_eval.summarize import audit_result_from_jsonable, flatten_audit_result
+        from evaluation.summarize import audit_result_from_jsonable, flatten_audit_result
 
         return flatten_audit_result(audit_result_from_jsonable(report))
 

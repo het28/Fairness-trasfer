@@ -6,7 +6,7 @@ import math
 from collections import defaultdict
 from typing import Dict, Sequence
 
-from cikm_eval.types import EvalInputs, GroupName, UserGroupUtilityResult, UserId
+from evaluation.types import EvalInputs, GroupName, UserGroupUtilityResult, UserId
 
 
 def ndcg_at_k(recommended: Sequence[int], relevant: set[int], k: int) -> float:

@@ -14,16 +14,16 @@ import torch
 from recbole.data.dataloader import FullSortEvalDataLoader
 from recbole.data.interaction import Interaction
 
-from cikm_eval.grouping import (
+from evaluation.grouping import (
     item_group_labels_from_train_coo,
     normalized_popularity,
     user_mainstreamness_labels,
 )
-from cikm_eval.grouping_sanity import user_group_sanity_table
-from cikm_eval.rerank import rerank_topk
-from cikm_eval.sanity import validate_eval_inputs
-from cikm_eval.summarize import audit_result_from_jsonable, audit_result_to_jsonable, run_full_fairness_audit
-from cikm_eval.types import (
+from evaluation.grouping_sanity import user_group_sanity_table
+from evaluation.rerank import rerank_topk
+from evaluation.sanity import validate_eval_inputs
+from evaluation.summarize import audit_result_from_jsonable, audit_result_to_jsonable, run_full_fairness_audit
+from evaluation.types import (
     EvalInputs,
     FullFairnessAuditResult,
     ItemId,
@@ -232,7 +232,7 @@ def run_fairness_audit(
         return {"error": "no recommendations collected"}
 
     if eval_inputs_path is not None:
-        from cikm_eval.io import save_eval_inputs
+        from evaluation.io import save_eval_inputs
 
         save_eval_inputs(inputs, eval_inputs_path)
 

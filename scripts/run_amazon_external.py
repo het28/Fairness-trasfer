@@ -21,7 +21,7 @@ sys.path.insert(0, str(ROOT / "src"))
 os.chdir(ROOT)
 os.environ["PYTHONPATH"] = str(ROOT / "src") + os.pathsep + os.environ.get("PYTHONPATH", "")
 
-from cikm_train.run_experiment import run_experiment
+from training.run_experiment import run_experiment
 
 OUT = ROOT / "runs" / "external" / "amazon"
 SEEDS = [int(x) for x in os.environ.get("SEEDS", "0 1 2").split()]
@@ -30,14 +30,14 @@ MODELS = os.environ.get("MODELS", "weighted_lightgcn weighted_ngcf weighted_bpr"
 
 DATASET_CFG = {
     "amazonbooks_ecir": {
-        "yaml": "config/cikm_amazonbooks_ecir_{stem}.yaml",
+        "yaml": "configs/external/amazon_books_{stem}.yaml",
         "short": "amazonbooks_ecir",
         "recbole": "amazon-books-ecir",
         "multiply_c_ui": True,
         "c_ui_transform": "identity",  # implicit ones
     },
     "gowalla_ecir": {
-        "yaml": "config/cikm_gowalla_ecir_{stem}.yaml",
+        "yaml": "configs/external/gowalla_{stem}.yaml",
         "short": "gowalla_ecir",
         "recbole": "gowalla-ecir",
         "multiply_c_ui": True,
@@ -101,10 +101,10 @@ def main():
                     cfg = {
                         "seed": seed,
                         "dataset": meta["recbole"],
-                        "cikm_backbone": model,
-                        "cikm_dataset_short": meta["short"],
-                        "cikm_model_short": model,
-                        "cikm_run_label": label,
+                        "backbone": model,
+                        "dataset_short": meta["short"],
+                        "model_short": model,
+                        "run_label": label,
                         "meg_rw_multiply_c_ui": meta["multiply_c_ui"],
                         "meg_rw_c_ui_transform": meta["c_ui_transform"],
                         "meg_rw_save_calibration_info": True,

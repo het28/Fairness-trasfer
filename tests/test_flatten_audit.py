@@ -1,7 +1,7 @@
 """Flat CSV export from FullFairnessAuditResult."""
 
-from cikm_eval.summarize import audit_result_from_jsonable, audit_result_to_jsonable, flatten_audit_result
-from cikm_eval.types import (
+from evaluation.summarize import audit_result_from_jsonable, audit_result_to_jsonable, flatten_audit_result
+from evaluation.types import (
     FullFairnessAuditResult,
     TransferMatrixResult,
     UserGroupUtilityResult,
@@ -13,7 +13,7 @@ def _minimal_result(
     with_delta: bool = False,
     with_align: bool = False,
 ) -> FullFairnessAuditResult:
-    from cikm_eval.types import AlignmentResult, TransferDeltaResult
+    from evaluation.types import AlignmentResult, TransferDeltaResult
 
     uf = UserGroupUtilityResult(
         group_ndcg={"niche": 0.1, "mainstream": 0.2},

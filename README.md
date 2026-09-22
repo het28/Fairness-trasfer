@@ -1,11 +1,9 @@
 # When Does Fairness Calibration Transfer?
 ## Understanding Input-to-Output Exposure in Recommender Systems
 
-Anonymous artifact for peer review.
-
 This repository accompanies the ECIR 2027 submission. It provides (i) source code for the interventions and recommenders used in the study, (ii) **frozen machine-readable results** sufficient to regenerate paper tables and figures **without retraining**, and (iii) optional runners for full experiment reproduction.
 
-Repository URL (review): `<ANONYMOUS_REPOSITORY_URL>`
+Repository: https://github.com/het28/Fairness-trasfer
 
 ---
 
@@ -43,8 +41,8 @@ Evidence tiers (never pool unlabeled): **PRIMARY**, **POST_LEARNING**, **TARGETE
 |---|---|
 | `src/meg_rw/` | Grouping, \(T\), inverse-power, KL |
 | `src/recbole_ext/` | Weighted RecBole backbones |
-| `src/cikm_train/` | Training / MEG-RW injection |
-| `src/cikm_eval/` | Full-sort evaluation, \(L_{\exp}\), Steck rerank |
+| `src/training/` | Training / MEG-RW injection |
+| `src/evaluation/` | Full-sort evaluation, \(L_{\exp}\), Steck rerank |
 | `src/analysis/` | Offline analysis helpers |
 | `configs/` | Primary / external / post-learning grids |
 | `results/` | Frozen CSVs/JSON by evidence tier |

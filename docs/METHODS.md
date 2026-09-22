@@ -37,7 +37,7 @@ Final edge/sample weight:
 | MovieLens-1M | \(c_{ui}=1\) (rating field not loaded in ECIR configs) |
 | Last.fm | \(c_{ui}=\log(1+w_{ui})\) on listening counts |
 
-Code: `src/cikm_train/recbole_dataset.py` (`_extract_c_ui`, `inject_meg_rw_into_train_dataset`).
+Code: `src/training/recbole_dataset.py` (`_extract_c_ui`, `inject_meg_rw_into_train_dataset`).
 
 ## Inverse-power intervention
 
@@ -93,7 +93,7 @@ Relative NDCG@10 loss vs same-seed baseline:
 L_{\exp}(u)=\tfrac12\|E_u-T\|_1\in[0,1]
 \]
 
-where \(E_u\) is the user’s Top-\(K\) group-share vector (`src/cikm_eval/exposure.py`).
+where \(E_u\) is the user’s Top-\(K\) group-share vector (`src/evaluation/exposure.py`).
 
 ## Evaluation protocol
 

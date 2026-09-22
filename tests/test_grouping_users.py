@@ -1,6 +1,6 @@
 import numpy as np
 
-from cikm_eval.grouping import user_mainstreamness_labels
+from evaluation.grouping import user_mainstreamness_labels
 
 
 def test_user_mainstreamness_shape():

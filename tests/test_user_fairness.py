@@ -1,7 +1,7 @@
 """User-group NDCG / Recall aggregation (macro means)."""
 
-from cikm_eval.types import EvalInputs
-from cikm_eval.user_fairness import (
+from evaluation.types import EvalInputs
+from evaluation.user_fairness import (
     aggregate_user_group_utility,
     compute_per_user_utility,
     compute_user_group_fairness,

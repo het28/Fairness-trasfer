@@ -23,8 +23,8 @@ eval_args:
   order: RO
   mode: full
 
-# --- Project extensions (read by cikm_train.run_experiment) ---
-cikm_backbone: weighted_lightgcn
+# --- Project extensions (read by training.run_experiment) ---
+backbone: weighted_lightgcn
 meg_rw_alpha: 0.3
 meg_rw_value_field: meg_rw_weight
 meg_rw_mode: dominance            # dominance | catalog | uniform
@@ -32,9 +32,9 @@ meg_rw_group_fracs: [0.1, 0.2, 0.3, 0.4]
 meg_rw_normalize_phi: false
 
 # Optional post-hoc SOTA reranking baselines (applied at evaluation list construction)
-cikm_sota_method: none               # none | pop_inverse | head_penalty | xquad_pop | mmr_pop | calib_pop
-cikm_sota_lambda: 0.2
-cikm_sota_candidate_mult: 20
+sota_method: none               # none | pop_inverse | head_penalty | xquad_pop | mmr_pop | calib_pop
+sota_lambda: 0.2
+sota_candidate_mult: 20
 
 # Optional semantic reweighting (semantic x popularity)
 meg_sem_enable: false

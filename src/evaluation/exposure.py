@@ -6,7 +6,7 @@ from collections import Counter, defaultdict
 
 import numpy as np
 
-from cikm_eval.types import EvalInputs, GroupName, ordered_item_groups
+from evaluation.types import EvalInputs, GroupName, ordered_item_groups
 
 
 def catalog_share_from_item_map(item_group: dict[int, GroupName]) -> dict[GroupName, float]:

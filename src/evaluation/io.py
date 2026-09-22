@@ -7,8 +7,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from cikm_eval.summarize import audit_result_to_jsonable
-from cikm_eval.types import EvalInputs, FullFairnessAuditResult, ItemId, UserId
+from evaluation.summarize import audit_result_to_jsonable
+from evaluation.types import EvalInputs, FullFairnessAuditResult, ItemId, UserId
 
 
 def save_audit_json(result: FullFairnessAuditResult | dict[str, Any], path: str | Path) -> None:

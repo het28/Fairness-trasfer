@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import math
 
-from cikm_eval.types import (
+from evaluation.types import (
     ITEM_GROUP_ORDER,
     USER_GROUP_ORDER,
     EvalInputs,
