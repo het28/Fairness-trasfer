@@ -1,0 +1,48 @@
+{
+  "n_runs": 270,
+  "n_interventions": 240,
+  "q1_frac_fout_improve_mean_lexp_improves": 0.995260663507109,
+  "q1_spearman_deltaFout_deltaLexpMean": 0.9857586472331886,
+  "q1_n_fout_improve": 211,
+  "q1_n_fout_worsen": 28,
+  "q2_frac_fout_improve_p90_improves": 0.004739336492890996,
+  "q2_frac_fout_improve_p95_improves": 0.0,
+  "q2_frac_fout_improve_p90_any_change": 0.004739336492890996,
+  "q2_frac_fout_improve_p95_any_change": 0.0,
+  "q3_n_fout_up_p90_worsen": 0,
+  "q3_n_fout_up_p95_worsen": 0,
+  "q4_left_behind_counts": {
+    "niche": 9,
+    "semi_niche": 6,
+    "semi_mainstream": 2,
+    "mainstream": 17
+  },
+  "q4_mean_delta_lexp_by_group": {
+    "niche": 0.061610803878949336,
+    "semi_niche": 0.04329245995950295,
+    "semi_mainstream": 0.03397971109874449,
+    "mainstream": 0.011703522404114021
+  },
+  "q5_family_means": {
+    "delta_l_exp_mean": {
+      "kl": 0.03878655515637566,
+      "legacy": 0.03644323182209554
+    },
+    "delta_l_exp_p90": {
+      "kl": 0.0,
+      "legacy": 0.0008333333333333332
+    },
+    "delta_l_exp_p95": {
+      "kl": 0.0,
+      "legacy": 0.0
+    },
+    "delta_F_out": {
+      "kl": 0.061574793781506605,
+      "legacy": 0.06127319737999408
+    },
+    "OutputGain": {
+      "kl": 0.061574793781506564,
+      "legacy": 0.06127319737999404
+    }
+  }
+}

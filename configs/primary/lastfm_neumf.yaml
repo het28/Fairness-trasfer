@@ -1,0 +1,12 @@
+# LastFM + NeuMF
+dataset: lastfm
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: artist_id
+RATING_FIELD: weight
+load_col:
+  inter: [user_id, artist_id, weight]
+
+mf_embedding_size: 64
+mlp_embedding_size: 64
+mlp_hidden_size: [64, 32, 16, 8]
+dropout_prob: 0.0

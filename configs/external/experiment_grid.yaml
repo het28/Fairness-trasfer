@@ -1,0 +1,16 @@
+gowalla_ngcf:
+  evidence_tier: TARGETED_EXTERNAL
+  model: weighted_ngcf
+  seeds: [0, 1, 2]
+  interventions:
+    - {label: legacy_a0.8, meg_cal_mode: legacy_inverse_power, meg_rw_alpha: 0.8}
+    - {label: kl_lam0.1, meg_cal_mode: kl_projection, meg_cal_lambda_r: 0.1, meg_cal_target: catalog}
+amazon_books_lightgcn:
+  evidence_tier: EXTERNAL_CASE_STUDY
+  model: weighted_lightgcn
+  seeds: [0]
+  interventions:
+    - {label: legacy_a0.2, meg_cal_mode: legacy_inverse_power, meg_rw_alpha: 0.2}
+    - {label: legacy_a0.8, meg_cal_mode: legacy_inverse_power, meg_rw_alpha: 0.8}
+    - {label: kl_lam0.1, meg_cal_mode: kl_projection, meg_cal_lambda_r: 0.1, meg_cal_target: catalog}
+    - {label: kl_lam2.0, meg_cal_mode: kl_projection, meg_cal_lambda_r: 2.0, meg_cal_target: catalog}

@@ -1,0 +1,6 @@
+# MovieLens-1M + ItemKNN
+dataset: ml-1m
+
+k: 100
+knn_method: item
+shrink: 0.0

@@ -1,0 +1,46 @@
+# Shared RecBole settings (override paths for your machine)
+data_path: dataset/
+checkpoint_dir: saved/
+
+epochs: 50
+train_batch_size: 2048
+eval_batch_size: 4096
+learning_rate: 0.001
+stopping_step: 15
+eval_step: 1
+seed: 2020
+reproducibility: true
+use_gpu: false
+
+metrics: ['Recall', 'NDCG', 'MRR']
+topk: [10]
+valid_metric: NDCG@10
+valid_metric_bigger: true
+
+eval_args:
+  split: {'RS': [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: full
+
+# --- Project extensions (read by cikm_train.run_experiment) ---
+cikm_backbone: weighted_lightgcn
+meg_rw_alpha: 0.3
+meg_rw_value_field: meg_rw_weight
+meg_rw_mode: dominance            # dominance | catalog | uniform
+meg_rw_group_fracs: [0.1, 0.2, 0.3, 0.4]
+meg_rw_normalize_phi: false
+
+# Optional post-hoc SOTA reranking baselines (applied at evaluation list construction)
+cikm_sota_method: none               # none | pop_inverse | head_penalty | xquad_pop | mmr_pop | calib_pop
+cikm_sota_lambda: 0.2
+cikm_sota_candidate_mult: 20
+
+# Optional semantic reweighting (semantic x popularity)
+meg_sem_enable: false
+meg_sem_beta: 0.0
+meg_sem_dim: 128
+meg_sem_clip_z: 2.0
+meg_sem_wmin: 0.5
+meg_sem_wmax: 2.0
+meg_sem_renorm_mean_one: true

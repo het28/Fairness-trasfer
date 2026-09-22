@@ -1,0 +1,8 @@
+# MovieLens-1M + NGCF
+dataset: ml-1m
+
+embedding_size: 64
+hidden_size_list: [64, 64, 64]
+node_dropout: 0.1
+message_dropout: 0.1
+reg_weight: 1.0e-5

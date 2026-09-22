@@ -1,0 +1,47 @@
+# Byte-compiled
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Secrets / env
+.env
+.env.*
+*.key
+*.pem
+
+# Checkpoints / caches (do not ignore frozen CSV/JSON under results/)
+*.pth
+*.pt
+*.ckpt
+checkpoints/
+cache/
+tmp/
+logs/
+wandb/
+
+# Datasets (obtain separately)
+data/raw/
+dataset/
+datasets/raw/
+
+# IDE / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local run outputs
+runs/
+outputs/
+_checkpoints/

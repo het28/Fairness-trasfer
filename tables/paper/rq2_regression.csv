@@ -1,0 +1,4 @@
+model_id,formula,r2,adjusted_r2,n_obs,n_params,frozen_r2,authoritative
+M0,F_out ~ F_in,0.12429412047428479,0.12061468400568931,240,2,0.12429412047428479,True
+M1,F_out ~ F_in + Dataset + Model,0.620192049385242,0.6104115871376516,240,7,0.620192049385242,True
+M2,"F_out ~ F_in + (Dataset×Model cell dummies, additive)",0.8806262265997117,0.875413398066948,240,11,0.8806262265997117,True

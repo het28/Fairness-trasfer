@@ -1,0 +1,33 @@
+# Primary ECIR matrix — authoritative grid
+datasets: [ml1m, lastfm]
+models: [weighted_itemknn, weighted_bpr, weighted_neumf, weighted_lightgcn, weighted_ngcf]
+seeds: [0, 1, 2]
+baseline:
+  meg_rw_alpha: 0.0
+  meg_cal_mode: ""
+inverse_power:
+  meg_cal_mode: legacy_inverse_power
+  alpha: [0.1, 0.2, 0.4, 0.8]
+kl:
+  meg_cal_mode: kl_projection
+  meg_cal_target: catalog
+  lambda_R: [0.1, 0.5, 2.0, 8.0]
+shared:
+  meg_rw_group_fracs: [0.1, 0.2, 0.3, 0.4]
+  meg_rw_normalize_phi: false
+  meg_rw_multiply_c_ui: true
+  meg_sem_enable: false
+  use_gpu: false
+  reproducibility: true
+  topk: [10]
+  eval_args:
+    split: {RS: [0.8, 0.1, 0.1]}
+    order: RO
+    group_by: user
+    mode: {valid: full, test: full}
+c_ui:
+  ml1m: {transform: identity, note: "rating not loaded; effective c_ui = 1"}
+  lastfm: {transform: log1p, field: weight}
+total_configurations: 270
+baselines: 30
+interventions: 240

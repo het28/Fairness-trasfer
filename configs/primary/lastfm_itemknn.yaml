@@ -1,0 +1,11 @@
+# LastFM + ItemKNN
+dataset: lastfm
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: artist_id
+RATING_FIELD: weight
+load_col:
+  inter: [user_id, artist_id, weight]
+
+k: 100
+knn_method: item
+shrink: 0.0

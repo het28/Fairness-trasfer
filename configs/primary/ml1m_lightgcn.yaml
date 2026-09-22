@@ -1,0 +1,7 @@
+# MovieLens-1M + LightGCN-compatible hyperparameters
+dataset: ml-1m
+
+embedding_size: 64
+n_layers: 3
+reg_weight: 1.0e-4
+require_pow: false

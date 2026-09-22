@@ -1,0 +1,13 @@
+# LastFM + NGCF
+dataset: lastfm
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: artist_id
+RATING_FIELD: weight
+load_col:
+  inter: [user_id, artist_id, weight]
+
+embedding_size: 64
+hidden_size_list: [64, 64, 64]
+node_dropout: 0.1
+message_dropout: 0.1
+reg_weight: 1.0e-5

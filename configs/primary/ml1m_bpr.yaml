@@ -1,0 +1,5 @@
+# MovieLens-1M + BPR
+dataset: ml-1m
+
+embedding_size: 64
+reg_weight: 1.0e-4

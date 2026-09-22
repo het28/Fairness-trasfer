@@ -1,0 +1,14 @@
+n,mean_relative_NDCG_loss,median_relative_NDCG_loss,q25_relative_NDCG_loss,q75_relative_NDCG_loss,min_relative_NDCG_loss,max_relative_NDCG_loss,n_loss_gt_1pct,rate_loss_gt_1pct,n_loss_gt_5pct,rate_loss_gt_5pct,n_loss_gt_10pct,rate_loss_gt_10pct,spearman_OutputGain_relative_NDCG_loss,frozen_source,slice,dataset,model,family
+240,0.0818954638264881,0.02389816317909205,0.0,0.12283045112884865,0.0,0.4643186419555249,146.0,0.6083333333333333,95.0,0.3958333333333333,68.0,0.2833333333333333,0.614289118686852,contribution_validation_summary.json,,,,
+24,0.08139988498181087,0.04630199232111845,,,,,,,,,,,0.9651874847798433,contribution_validation_summary.json,dataset_model,lastfm,BPR,
+24,0.16601563665719143,0.10740712880689285,,,,,,,,,,,0.9799999999999999,contribution_validation_summary.json,dataset_model,lastfm,ItemKNN,
+24,0.0,0.0,,,,,,,,,,,,contribution_validation_summary.json,dataset_model,lastfm,LightGCN,
+24,0.09906028478585432,0.0634817352230533,,,,,,,,,,,0.8006088469322947,contribution_validation_summary.json,dataset_model,lastfm,NeuMF,
+24,0.05852182985154697,0.040821913986985994,,,,,,,,,,,0.8947826086956522,contribution_validation_summary.json,dataset_model,lastfm,NGCF,
+24,0.1509166929435127,0.0870108039064994,,,,,,,,,,,0.9539130434782607,contribution_validation_summary.json,dataset_model,ml1m,BPR,
+24,0.1106454109749827,0.027727964835887152,,,,,,,,,,,0.9495652173913043,contribution_validation_summary.json,dataset_model,ml1m,ItemKNN,
+24,0.00041383321612987914,0.0,,,,,,,,,,,-0.2849320247400959,contribution_validation_summary.json,dataset_model,ml1m,LightGCN,
+24,0.15062415737792514,0.08935768746954525,,,,,,,,,,,0.7721739130434783,contribution_validation_summary.json,dataset_model,ml1m,NeuMF,
+24,0.0013569074759270418,0.0,,,,,,,,,,,-0.07144849130418995,contribution_validation_summary.json,dataset_model,ml1m,NGCF,
+120,0.08817207233221902,0.02389816317909205,,,,,,,,,,,0.6098417423216465,,family,,,minimum-perturbation KL
+120,0.07561885532075721,0.02392736209200155,,,,,,,,,,,0.6242885155023898,,family,,,inverse-power

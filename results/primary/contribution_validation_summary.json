@@ -1,0 +1,35 @@
+{
+  "bin_og_std": 0.07330041993658838,
+  "m0_r2": 0.12429412047428479,
+  "m1_r2": 0.620192049385242,
+  "m2_r2": 0.8806262265997117,
+  "slopes": {
+    "lastfm/BPR": 0.20835710852629513,
+    "lastfm/ItemKNN": 0.8120567562564904,
+    "lastfm/LightGCN": 0.12333444726387152,
+    "lastfm/NeuMF": 0.03717679617821206,
+    "lastfm/NGCF": 0.05077860800167414,
+    "ml1m/BPR": 0.6328542268739271,
+    "ml1m/ItemKNN": 0.9463516940324659,
+    "ml1m/LightGCN": 0.08252292947941299,
+    "ml1m/NeuMF": 0.3984258165321434,
+    "ml1m/NGCF": -0.0014277808759622199
+  },
+  "atten_rate": 0.9875,
+  "med_ratio": 0.11149107407417141,
+  "rev_rate": 0.12083333333333333,
+  "rev_cells": {
+    "lastfm/weighted_neumf": 6,
+    "ml1m/weighted_bpr": 1,
+    "ml1m/weighted_neumf": 2,
+    "ml1m/weighted_ngcf": 20
+  },
+  "fam_r2_delta": 0.0017082863166715256,
+  "n_big_utility_loss": 95,
+  "corr_util_og": 0.614289118686852,
+  "gowalla_mean_og": 0.0027228883381337954,
+  "gowalla_std_og": 0.0016834583475979531,
+  "n_interventions": 240,
+  "n_positive_og": 211,
+  "n_reversals": 29
+}
