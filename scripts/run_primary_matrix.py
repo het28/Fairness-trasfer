@@ -182,9 +182,8 @@ def jobs_kl():
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "README.md").write_text(
-        "# Clean ECIR matrix artifacts\n\n"
-        "Do **not** mix with `experiments/cikm2026`.\n"
-        "All baselines / legacy / KL curves for ECIR live here.\n"
+        "# Primary matrix run outputs\n\n"
+        "Baselines, inverse-power, and KL runs written here.\n"
     )
     phases = {
         "baselines": [jobs_baselines],
