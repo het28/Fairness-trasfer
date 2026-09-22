@@ -3,8 +3,6 @@
 
 This repository accompanies the ECIR 2027 submission. It provides (i) source code for the interventions and recommenders used in the study, (ii) **frozen machine-readable results** sufficient to regenerate paper tables and figures **without retraining**, and (iii) optional runners for full experiment reproduction.
 
-Repository: https://github.com/het28/Fairness-trasfer
-
 ---
 
 ## 1. Overview
